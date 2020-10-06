@@ -101,6 +101,11 @@ def process_block_data(block_df, block_obj):
         block_mingasprice = block_df['round_gp_10gwei'].min()
     else:
         block_mingasprice = np.nan
+    
+    print('------------------block_mingasprice------------------------')
+    print(block_mingasprice)
+    print('-----------------------------------------------------------')
+    
     timemined = block_df['time_mined'].min()
     clean_block = CleanBlock(block_obj, timemined, block_mingasprice)
     return(clean_block.to_dataframe())
@@ -215,10 +220,7 @@ def master_control():
             (mined_blockdf, block_obj) = process_block_transactions(mined_block_num)
 
             alltx = alltx.combine_first(mined_blockdf)
-            
-            print('---------------alltx---------------------\n')
-            print(alltx)
-            print('-------------------------------------------')
+
 
             #process block data
             block_sumdf = process_block_data(mined_blockdf, block_obj)
