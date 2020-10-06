@@ -213,10 +213,13 @@ def master_control():
             #get minedtransactions and blockdata from previous block
             mined_block_num = block-3
             (mined_blockdf, block_obj) = process_block_transactions(mined_block_num)
-            print(mined_blockdf)
-            print(block_obj)
+
             alltx = alltx.combine_first(mined_blockdf)
-           
+            
+            print('---------------alltx---------------------\n')
+            print(alltx)
+            print('-------------------------------------------')
+
             #process block data
             block_sumdf = process_block_data(mined_blockdf, block_obj)
 
