@@ -100,7 +100,7 @@ def process_block_data(block_df, block_obj):
     if len(block_obj.transactions) > 0:
         x = block_df['round_gp_10gwei']
         masked_a = np.ma.masked_array(x, mask=x==0)
-        block_mingasprice = 0
+        block_mingasprice = masked_a.min()
         print('------------------block_mingasprice------------------------')
         print(masked_a)
         print('-----------------------------------------------------------')
