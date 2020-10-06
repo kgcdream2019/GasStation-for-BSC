@@ -112,13 +112,10 @@ def process_block_data(block_df, block_obj):
         block_mingasprice = np.nan
     
     timemined = block_df['time_mined'].min()
-    print('------------------timemined------------------------')
-    print(block_df['time_mined'])
-    print('-----------------------------------------------------------')
-    print(timemined)
+    # print('------------------timemined------------------------')
+    # print(block_df['time_mined'])
     # print('-----------------------------------------------------------')
-    # print(block_mingasprice)
-    # print('-----------------------------------------------------------')
+    # print(timemined)
     clean_block = CleanBlock(block_obj, timemined, block_mingasprice)
     return(clean_block.to_dataframe())
 
