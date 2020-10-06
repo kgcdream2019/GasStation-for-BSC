@@ -103,6 +103,8 @@ def process_block_data(block_df, block_obj):
         block_mingasprice = np.nan
     
     print('------------------block_mingasprice------------------------')
+    print(block_df)
+    print('-----------------------------------------------------------')
     print(block_mingasprice)
     print('-----------------------------------------------------------')
     
