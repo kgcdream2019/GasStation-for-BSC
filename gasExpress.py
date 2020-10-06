@@ -112,6 +112,13 @@ def process_block_data(block_df, block_obj):
         block_mingasprice = np.nan
     
     timemined = block_df['time_mined'].min()
+    print('------------------block_mingasprice------------------------')
+    print(block_df['time_mined'])
+    print('-----------------------------------------------------------')
+    # print(block_df['round_gp_10gwei'])
+    # print('-----------------------------------------------------------')
+    # print(block_mingasprice)
+    # print('-----------------------------------------------------------')
     clean_block = CleanBlock(block_obj, timemined, block_mingasprice)
     return(clean_block.to_dataframe())
 
@@ -139,13 +146,6 @@ def analyze_last200blocks(block, blockdata):
     blockinterval.loc[blockinterval['block_number'] > 1, 'time_mined'] = np.nan
     blockinterval.loc[blockinterval['time_mined']< 0, 'time_mined'] = np.nan
     avg_timemined = blockinterval['time_mined'].mean()
-    print('------------------blockinterval------------------------')
-    print(blockinterval)
-    print('-----------------------------------------------------------')
-    # print(block_df['round_gp_10gwei'])
-    # print('-----------------------------------------------------------')
-    # print(block_mingasprice)
-    # print('-----------------------------------------------------------')
     if np.isnan(avg_timemined):
         avg_timemined = 15
     return(hashpower, avg_timemined)
