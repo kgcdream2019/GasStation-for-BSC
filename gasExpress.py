@@ -9,7 +9,7 @@ import numpy as np
 from web3 import Web3, HTTPProvider
 
 
-web3 = Web3(HTTPProvider('http://localhost:8545'))
+web3 = Web3(HTTPProvider('https://bsc-dataseed4.binance.org'))
 
 ### These are the threholds used for % blocks accepting to define the recommended gas prices. can be edited here if desired
 
