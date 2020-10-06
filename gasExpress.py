@@ -101,17 +101,15 @@ def process_block_data(block_df, block_obj):
         x = block_df['round_gp_10gwei']
         masked_a = np.ma.masked_array(x, mask=x==0)
         block_mingasprice = masked_a.min()
-        print('------------------block_mingasprice------------------------')
-        print(masked_a)
-        print('-----------------------------------------------------------')
-        print(block_df['round_gp_10gwei'])
-        print('-----------------------------------------------------------')
-        print(block_mingasprice)
-        print('-----------------------------------------------------------')
+        # print('------------------block_mingasprice------------------------')
+        # print(masked_a)
+        # print('-----------------------------------------------------------')
+        # print(block_df['round_gp_10gwei'])
+        # print('-----------------------------------------------------------')
+        # print(block_mingasprice)
+        # print('-----------------------------------------------------------')
     else:
         block_mingasprice = np.nan
-    
-
     
     timemined = block_df['time_mined'].min()
     clean_block = CleanBlock(block_obj, timemined, block_mingasprice)
