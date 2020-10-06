@@ -103,6 +103,8 @@ def process_block_data(block_df, block_obj):
         print('------------------block_mingasprice------------------------')
         print(masked_a)
         print('-----------------------------------------------------------')
+        print(block_df['round_gp_10gwei'])
+        print('-----------------------------------------------------------')
         print(block_mingasprice)
         print('-----------------------------------------------------------')
     else:
