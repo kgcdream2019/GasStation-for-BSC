@@ -98,7 +98,7 @@ def process_block_transactions(block):
 def process_block_data(block_df, block_obj):
     """process block to dataframe"""
     if len(block_obj.transactions) > 0:
-        masked_a = np.nonzero(block_df['round_gp_10gwei'])
+        masked_a = np.nonzero(block_df['round_gp_10gwei'][1])
         block_mingasprice = np.min(masked_a)
         print('------------------block_mingasprice------------------------')
         print(masked_a)
