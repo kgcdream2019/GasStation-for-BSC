@@ -140,7 +140,7 @@ def analyze_last200blocks(block, blockdata):
     blockinterval.loc[blockinterval['time_mined']< 0, 'time_mined'] = np.nan
     avg_timemined = blockinterval['time_mined'].mean()
     print('------------------blockinterval------------------------')
-    print(blockinterval['time_mined'])
+    print(blockinterval)
     print('-----------------------------------------------------------')
     # print(block_df['round_gp_10gwei'])
     # print('-----------------------------------------------------------')
