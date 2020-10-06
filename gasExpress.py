@@ -139,6 +139,13 @@ def analyze_last200blocks(block, blockdata):
     blockinterval.loc[blockinterval['block_number'] > 1, 'time_mined'] = np.nan
     blockinterval.loc[blockinterval['time_mined']< 0, 'time_mined'] = np.nan
     avg_timemined = blockinterval['time_mined'].mean()
+    print('------------------blockinterval------------------------')
+    print(blockinterval['time_mined'])
+    print('-----------------------------------------------------------')
+    # print(block_df['round_gp_10gwei'])
+    # print('-----------------------------------------------------------')
+    # print(block_mingasprice)
+    # print('-----------------------------------------------------------')
     if np.isnan(avg_timemined):
         avg_timemined = 15
     return(hashpower, avg_timemined)
