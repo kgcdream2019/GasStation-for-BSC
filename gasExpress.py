@@ -98,15 +98,17 @@ def process_block_transactions(block):
 def process_block_data(block_df, block_obj):
     """process block to dataframe"""
     if len(block_obj.transactions) > 0:
-        block_mingasprice = block_df['round_gp_10gwei'].min()
+        masked_a = block_df['round_gp_10gwei']
+        block_mingasprice = np.min(masked_a[np.nonzero(masked_a)])
+        print('------------------block_mingasprice------------------------')
+        print(masked_a)
+        print('-----------------------------------------------------------')
+        print(block_mingasprice)
+        print('-----------------------------------------------------------')
     else:
         block_mingasprice = np.nan
     
-    print('------------------block_mingasprice------------------------')
-    print(block_df)
-    print('-----------------------------------------------------------')
-    print(block_mingasprice)
-    print('-----------------------------------------------------------')
+
     
     timemined = block_df['time_mined'].min()
     clean_block = CleanBlock(block_obj, timemined, block_mingasprice)
