@@ -257,7 +257,7 @@ def master_control():
             print(stats)
 
             #every block, write gprecs, predictions    
-            write_to_json(stats, predictiondf)
+            # write_to_json(stats, predictiondf)
             return True
 
         except: 
