@@ -16,6 +16,11 @@ from retry import retry
 web3 = Web3(HTTPProvider('https://bsc-dataseed2.binance.org'))
 ### These are the threholds used for % blocks accepting to define the recommended gas prices. can be edited here if desired
 
+app = Sanic()
+log = logging.getLogger('sanic.error')
+app.config.LOGO = ''
+stats = {}
+
 SAFELOW = 35
 STANDARD = 60
 FAST = 90
@@ -192,6 +197,7 @@ def get_gasprice_recs(prediction_table, block_time, block):
     gprecs['blockNum'] = block
     return(gprecs)
 
+@retry(Exception, delay=1, logger=log)
 def master_control():
 
     def init (block):
@@ -245,11 +251,11 @@ def master_control():
             predictiondf = make_predictTable(block, alltx, hashpower, block_time)
 
             #get gpRecs
-            gprecs = get_gasprice_recs (predictiondf, block_time, block)
-            print(gprecs)
+            stats = get_gasprice_recs (predictiondf, block_time, block)
+            print(stats)
 
             #every block, write gprecs, predictions    
-            write_to_json(gprecs, predictiondf)
+            write_to_json(stats, predictiondf)
             return True
 
         except: 
@@ -272,8 +278,6 @@ def master_control():
 
         time.sleep(1)
 
-master_control()
-
 @app.route('/')
 async def api(request):
     return response.json(stats)
@@ -285,10 +289,9 @@ async def health(request):
 @click.command()
 @click.option('--host', '-h', default='127.0.0.1')
 @click.option('--port', '-p', default=8097)
-@click.option('--skip-warmup', '-s', is_flag=True)
 
-def main(host, port, skip_warmup):
-    bg = Thread(target=master_control, args=(skip_warmup,))
+def main(host, port):
+    bg = Thread(target=master_control, args=())
     bg.daemon = True
     bg.start()
     app.run(host=host, port=port, access_log=False)
