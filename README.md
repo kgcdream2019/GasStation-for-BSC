@@ -5,6 +5,6 @@ This is a simple gas price oracle that can be used on binance smart chain mainne
 
 it is similar as gasnow on etherreum blockchain
 
-usage: python3 gasExpress.py
+usage: python3 gasPriceApi.py
 
 requirements: pip3 install -r requirements.txt
