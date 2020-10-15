@@ -9,6 +9,7 @@ import numpy as np
 from web3 import Web3, HTTPProvider
 ## newly added packages for api
 import click
+import logging
 from threading import Thread
 from sanic import Sanic, response
 from retry import retry
