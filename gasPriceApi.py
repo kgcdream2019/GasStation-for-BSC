@@ -229,6 +229,7 @@ def master_control():
             alltx = alltx.append(clean_tx.to_dataframe(), ignore_index = False)
     
     def update_dataframes(block):
+        global stats
         nonlocal alltx
         nonlocal blockdata
         nonlocal timer
@@ -281,8 +282,7 @@ def master_control():
 
 @app.route('/')
 async def api(request):
-    # return response.json(stats)
-    return response.json('stats')
+    return response.json(stats)
     
 
 @app.route('/health')
