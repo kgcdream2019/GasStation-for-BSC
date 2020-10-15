@@ -281,7 +281,9 @@ def master_control():
 
 @app.route('/')
 async def api(request):
-    return response.json(stats)
+    # return response.json(stats)
+    return response.json('stats')
+    
 
 @app.route('/health')
 async def health(request):
