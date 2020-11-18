@@ -254,7 +254,7 @@ def master_control():
 
             #get gpRecs
             stats = get_gasprice_recs (predictiondf, block_time, block)
-            print(stats)
+            # print(stats)
 
             #every block, write gprecs, predictions    
             # write_to_json(stats, predictiondf)
