@@ -181,8 +181,8 @@ def get_gasprice_recs(prediction_table, block_time, block):
 
     def get_fast():
         series = prediction_table.loc[prediction_table['hashpower_accepting'] >= FAST, 'gasprice']
-        fastest = series.min()
-        return float(fastest)
+        fast = series.min()
+        return float(fast)
 
     def get_fastest():
         hpmax = prediction_table['hashpower_accepting'].max()
@@ -196,6 +196,15 @@ def get_gasprice_recs(prediction_table, block_time, block):
     gprecs['fastest'] = get_fastest()/10
     gprecs['block_time'] = block_time
     gprecs['blockNum'] = block
+    if gprecs['safeLow'] < 20.0:
+        gprecs['safeLow'] = 20.0
+    if gprecs['standard'] < 20.0:
+        gprecs['standard'] = 20.0
+    if gprecs['fast'] < 20.0:
+        gprecs['fast'] = 20.0
+    if gprecs['fastest'] < 20.0:
+        gprecs['fastest'] = 20.0
+    
     return(gprecs)
 
 @retry(Exception, delay=1, logger=log)
