@@ -14,7 +14,7 @@ from threading import Thread
 from sanic import Sanic, response
 from retry import retry
 
-web3 = Web3(HTTPProvider('https://bsc-dataseed2.binance.org'))
+web3 = Web3(HTTPProvider('https://bscnode1.julswap.com'))
 ### These are the threholds used for % blocks accepting to define the recommended gas prices. can be edited here if desired
 
 app = Sanic()
