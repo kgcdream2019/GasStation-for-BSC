@@ -232,10 +232,10 @@ def master_control():
         
 
         
-    def append_new_tx(clean_tx):
-        nonlocal alltx
-        if not clean_tx.hash in alltx.index:
-            alltx = alltx.append(clean_tx.to_dataframe(), ignore_index = False)
+    # def append_new_tx(clean_tx):
+    #     nonlocal alltx
+    #     if not clean_tx.hash in alltx.index:
+    #         alltx = alltx.append(clean_tx.to_dataframe(), ignore_index = False)
     
     def update_dataframes(block):
         global stats
@@ -248,7 +248,7 @@ def master_control():
             mined_block_num = block-3
             (mined_blockdf, block_obj) = process_block_transactions(mined_block_num)
 
-            alltx = alltx.combine_first(mined_blockdf)
+            # alltx = alltx.combine_first(mined_blockdf)
 
 
             #process block data
@@ -256,6 +256,9 @@ def master_control():
 
             #add block data to block dataframe 
             blockdata = blockdata.append(block_sumdf, ignore_index = True)
+
+            # limit blocks count to 200
+            blockdata = blockdata.loc[blockdata['block_number'] > (block-200)]
 
             #get hashpower table from last 200 blocks
             (hashpower, block_time) = analyze_last200blocks(block, blockdata)
