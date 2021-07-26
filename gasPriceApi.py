@@ -14,10 +14,10 @@ from threading import Thread
 from sanic import Sanic, response
 from retry import retry
 
-web3 = Web3(HTTPProvider('https://bscnode1.julswap.com'))
+web3 = Web3(HTTPProvider('https://rpcapi.fantom.network'))
 ### These are the threholds used for % blocks accepting to define the recommended gas prices. can be edited here if desired
 
-app = Sanic()
+app = Sanic('fantom gas price api')
 log = logging.getLogger('sanic.error')
 app.config.LOGO = ''
 stats = {}
@@ -204,7 +204,10 @@ def get_gasprice_recs(prediction_table, block_time, block):
         gprecs['fast'] = 20.0
     if gprecs['fastest'] < 20.0:
         gprecs['fastest'] = 20.0
-    
+    if math.isnan(gprecs['standard']):
+        gprecs['standard'] = gprecs['safeLow']
+    if math.isnan(gprecs['fast']):
+        gprecs['fast'] = gprecs['fastest']
     return(gprecs)
 
 @retry(Exception, delay=1, logger=log)
